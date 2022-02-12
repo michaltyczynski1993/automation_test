@@ -29,7 +29,7 @@ def password_generator(char_number = 20):
 def name_generator(min_number = 4, max_number = 10):
     """generate random name from list char"""
     name = ""
-    for i in range(min_number, max_number):
+    for i in range(random.randint(min_number, max_number)):
         i = random.randrange(len(NAMES) - 1)
         name += PASSWORD_LETTERS[i]
     return name
@@ -37,8 +37,7 @@ def name_generator(min_number = 4, max_number = 10):
 def last_name_generator(min_number = 3, max_number = 10):
     """generate random last name from list char"""
     last_name = ""
-    for i in range(min_number, max_number):
+    for i in range(random.randint(min_number, max_number)):
         i = random.randrange(len(LASTNAMES) - 1)
         last_name += PASSWORD_LETTERS[i]
     return last_name
-
