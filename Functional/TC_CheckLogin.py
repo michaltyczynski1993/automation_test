@@ -29,15 +29,15 @@ class UserLogin(unittest.TestCase):
         self.driver.quit()
 
     def test_validLogin(self):
-        #close pop up
+        # close pop up
         popUpBttn = self.driver.find_element(By.CLASS_NAME, "rodo-popup-agree")
         popUpBttn.click()
-        #enter user name and password
+        # enter user name and password
         userField = self.driver.find_element(By.XPATH, "//input[@class = 'account-input' and @name = 'email']")
         userField.send_keys(self.userName)
         passwordField = self.driver.find_element(By.XPATH, "//input[@class = 'account-input' and @name = 'password']")
         passwordField.send_keys(self.password)
-        #click submit button
+        # click submit button
         WebDriverWait(self.driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, "//*[text() = 'Zaloguj się']"))).click()
         print("Pozytywne Logowanie do konta na Interia.pl: ", self.driver.title == "Poczta w Interii")

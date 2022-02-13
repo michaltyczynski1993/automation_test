@@ -1,4 +1,5 @@
-from selenium.webdriver import ActionChains, Keys
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -8,6 +9,7 @@ import testData
 from selenium.webdriver.chrome.service import Service
 from Functional import generator as g
 import time
+
 
 class RegisterUser(unittest.TestCase):
     def setUp(self):
@@ -20,7 +22,7 @@ class RegisterUser(unittest.TestCase):
         self.driver.maximize_window()
 
     def test_registerNewUser(self):
-        #go to main page
+        # go to main page
         self.driver.get("https://www.interia.pl/")
         # close pop up rodo
         popUpBttn = self.driver.find_element(By.CLASS_NAME, "rodo-popup-agree")
@@ -45,7 +47,7 @@ class RegisterUser(unittest.TestCase):
         birthDay = self.driver.find_element(By.XPATH, "//div[@class = 'register-form__inputs__birthday']/div[1]/input")
         birthDay.send_keys("10")
         birthMonth = self.driver.find_element(By.XPATH,
-                                         "//div[@class = 'register-form__inputs__birthday']/div[2]/div[2]").click()
+                                              "//div[@class = 'register-form__inputs__birthday']/div[2]/div[2]").click()
         act = ActionChains(self.driver)
         act.send_keys(Keys.ARROW_DOWN).perform()
         act.send_keys(Keys.ENTER).perform()
@@ -58,7 +60,7 @@ class RegisterUser(unittest.TestCase):
         act.send_keys(Keys.TAB).perform()
         # enter username and password
         userName = self.driver.find_element(By.XPATH,
-                                       "/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[5]/div[1]/input")
+                                            "/html/body/div[1]/div/div/div/div/div[2]/div/form/div[1]/div[5]/div[1]/input")
         newUsername = "a" + g.user_generator()
         userName.send_keys(newUsername)
         loginU = userName.get_attribute('value')
@@ -71,19 +73,20 @@ class RegisterUser(unittest.TestCase):
         # click checkbox for policies
         self.driver.find_element(By.XPATH, "//*[@class = 'checkbox-wrapper']/div").click()
         self.driver.find_element(By.XPATH,
-                            "//*[@class = 'agreements-container agreements-container--expanded']/div[1]").click()
+                                 "//*[@class = 'agreements-container agreements-container--expanded']/div[1]").click()
         self.driver.find_element(By.XPATH,
-                            "//*[@class = 'agreements-container agreements-container--expanded']/div[2]").click()
+                                 "//*[@class = 'agreements-container agreements-container--expanded']/div[2]").click()
         self.driver.find_element(By.XPATH,
-                            "//*[@class = 'agreements-container agreements-container--expanded']/div[3]").click()
+                                 "//*[@class = 'agreements-container agreements-container--expanded']/div[3]").click()
         self.driver.find_element(By.XPATH,
-                            "//*[@class = 'agreements-container agreements-container--expanded']/div[4]").click()
+                                 "//*[@class = 'agreements-container agreements-container--expanded']/div[4]").click()
         time.sleep(2)
         # click create account button
         WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//button[@class = 'btn']"))).click()
         WebDriverWait(self.driver, 20).until(
             EC.element_to_be_clickable((By.XPATH,
-                                        "//div[@class = 'msglist-item__message'][1]/div[@class = 'msglist-item__link']"))).click()
+                                        "//div[@class = 'msglist-item__message'][1]/div[@class = 'msglist-item__link']"
+                                        ))).click()
         # print welcome message
         text = self.driver.find_element(By.XPATH, "//*[@class = 'message-header__subject']/span").text
         print("Twoja wiadomość powitalna to:", text)
@@ -96,7 +99,8 @@ class RegisterUser(unittest.TestCase):
         print("Login :", testData.username)
         print("Hasło: ", testData.password)
 
+
 if __name__ == '__main__':
     loader = unittest.TestLoader()
     loader.sortTestMethodsUsing = None
-    unittest.main(testLoader = loader)
+    unittest.main(testLoader=loader)
