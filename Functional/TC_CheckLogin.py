@@ -5,6 +5,7 @@ import unittest
 from selenium.webdriver.support import expected_conditions as EC
 import testData
 from selenium.webdriver.chrome.service import Service
+import locators
 
 class UserLogin(unittest.TestCase):
 
@@ -19,7 +20,7 @@ class UserLogin(unittest.TestCase):
             self.userName = "aWISshNhvGbxM3rI@interia.pl"
         else:
             self.userName = testData.username
-        if not testData.username:
+        if not testData.password:
             self.password = "baA3kDa08lVEO3H0ZHrh"
         else:
             self.password = testData.password
@@ -30,8 +31,7 @@ class UserLogin(unittest.TestCase):
 
     def test_validLogin(self):
         # close pop up
-        popUpBttn = self.driver.find_element(By.CLASS_NAME, "rodo-popup-agree")
-        popUpBttn.click()
+        locators.closeRodo(self.driver)
         # enter user name and password
         userField = self.driver.find_element(By.XPATH, "//input[@class = 'account-input' and @name = 'email']")
         userField.send_keys(self.userName)
@@ -43,10 +43,10 @@ class UserLogin(unittest.TestCase):
         print("Pozytywne Logowanie do konta na Interia.pl: ", self.driver.title == "Poczta w Interii")
         assert self.driver.title == "Poczta w Interii"
 
+
     def test_invalidLogin(self):
         # close pop up
-        popUpBttn = self.driver.find_element(By.CLASS_NAME, "rodo-popup-agree")
-        popUpBttn.click()
+        locator.closeRodo(self.driver)
         # enter user name and password
         userField = self.driver.find_element(By.XPATH, "//input[@class = 'account-input' and @name = 'email']")
         userField.send_keys(self.userName)
