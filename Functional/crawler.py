@@ -25,6 +25,7 @@ class InteriaCrawler(Crawler):
         self.driver.get("https://www.interia.pl/")
 
     def close_rodo_popup(self):
+        """ close rodo popup for firts time visitors """
         pop_up_bttn = self.driver.find_element(*locators.RODO_POPUP)
         pop_up_bttn.click()
 
@@ -37,6 +38,7 @@ class InteriaCrawler(Crawler):
         register_button.click()
 
     def choose_register_option(self):
+        """ choose free account option """
         if self.driver.title == "Załóż konto pocztowe – Poczta w Interia – rejestracja konta email":
             choose_button = self.driver.find_element(*locators.REGISTER_OPTION)
             choose_button.click()
@@ -93,10 +95,21 @@ class InteriaCrawler(Crawler):
         WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(locators.RECAPTCHA)).click()
 
     def print_welcome_msg_title(self):
+        """ print first message title from mailbox and login data """
         text = self.driver.find_element(*locators.TITLE).text
         print("Twoja wiadomość powitalna to:", text)
         self.driver.quit()
         print("Login :", testData.username)
         print("Hasło: ", testData.password)
 
+    def interia_login(self, username, password):
+        # enter user data like username and login
+        username_field = self.driver.find_element(*locators.LOGIN_USERNAME)
+        username_field.send_keys(username)
+        password_field = self.driver.find_element(*locators.LOGIN_PASSWORD)
+        password_field.send_keys(password)
+        # click submit button
+        WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(locators.LOGIN_SUBMIT_BTTN)).click()
 
+    def go_to_login_page(self):
+        self.driver.get("https://poczta.interia.pl/logowanie/#iwa_source=sg_ikona")

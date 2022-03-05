@@ -5,6 +5,9 @@ LOGINPAGE_LINK = (By.XPATH, "//*[@class = 'switch-mail']")
 
 # login page
 REGISTER_BUTTON = (By.XPATH, "//*[@class = 'btn btn--bordered']")
+LOGIN_USERNAME = (By.XPATH, "//input[@class = 'account-input' and @name = 'email']")
+LOGIN_PASSWORD = (By.XPATH, "//input[@class = 'account-input' and @name = 'password']")
+LOGIN_SUBMIT_BTTN = (By.XPATH, "//*[text() = 'Zaloguj się']")
 
 # register option site
 REGISTER_OPTION = (By.XPATH, "//a[contains(@href, '#/nowe-konto')]/button[1]")
